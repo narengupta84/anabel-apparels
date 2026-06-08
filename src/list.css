@@ -1,0 +1,131 @@
+/* ================================================================
+   ANABEL APPARELS — List Page Styles
+   ================================================================ */
+
+/* ---- Banner ---- */
+.list-banner {
+    margin-top: 75px; /* offset fixed header */
+    height: 280px;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+                linear-gradient(135deg, #1a1a1a, #3a3a3a);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+}
+
+.list-banner-content {
+    padding-bottom: 40px;
+}
+
+/* ---- Breadcrumb ---- */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.breadcrumb a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: var(--secondary-color);
+}
+
+.breadcrumb span {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.bc-sep {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+}
+
+/* ---- List Page Title ---- */
+.list-page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.list-count {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ---- Main Grid Area ---- */
+.list-main {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    min-height: 60vh;
+}
+
+.list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 35px;
+}
+
+/* ---- No Products ---- */
+.no-products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 80px 20px;
+    text-align: center;
+    color: #999;
+}
+
+.no-products i {
+    font-size: 3rem;
+    color: #ddd;
+}
+
+.no-products p {
+    font-size: 1.1rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .list-banner {
+        height: 220px;
+    }
+
+    .list-page-title {
+        font-size: 1.8rem;
+    }
+
+    .list-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .list-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .list-page-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+}
