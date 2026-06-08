@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | ANABEL APPARELS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="./src/style.css" type="text/css" rel="stylesheet">
+    <link href="./src/detail.css" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="nav-container container">
+            <a href="index.html" class="logo">ANABEL <span>APPARELS</span></a>
+
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#">Men <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="list.html?gender=male&category=formals">Formals</a></li>
+                        <li><a href="list.html?gender=male&category=shorts">Shorts</a></li>
+                        <li><a href="list.html?gender=male&category=trousers">Trousers</a></li>
+                        <li><a href="list.html?gender=male&category=joggers">Joggers</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#">Women <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="list.html?gender=female&category=formals">Formals</a></li>
+                        <li><a href="list.html?gender=female&category=shorts">Shorts</a></li>
+                        <li><a href="list.html?gender=female&category=trousers">Trousers</a></li>
+                        <li><a href="list.html?gender=female&category=joggers">Joggers</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#about-us">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#" class="nav-icon" id="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== DETAIL MAIN ===== -->
+    <main class="detail-page">
+
+        <!-- Breadcrumb -->
+        <div class="detail-breadcrumb container" id="breadcrumb-bar">
+            <!-- populated by JS -->
+        </div>
+
+        <!-- Product Content -->
+        <section class="detail-section container visible">
+            <div class="detail-content" id="detail-content">
+                <!-- populated by JS -->
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="related-section container visible">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="product-grid related-grid" id="related-grid">
+                <!-- populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">ANABEL <span>APPARELS</span></div>
+            <ul class="social-links">
+                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            <p class="copyright">&copy; 2026 Anabel Apparels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-body" id="cart-items-container">
+            <p class="empty-cart-msg">Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+                <i class="fab fa-whatsapp"></i> Ask for Price via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="./src/data.js"></script>
+    <script src="./src/app.js"></script>
+    <script>
+        (function () {
+            var params  = new URLSearchParams(window.location.search);
+            var id      = parseInt(params.get('id'));
+            var product = PRODUCTS.find(function(p) { return p.id === id; });
+
+            var contentEl    = document.getElementById('detail-content');
+            var breadcrumbEl = document.getElementById('breadcrumb-bar');
+            var relatedGrid  = document.getElementById('related-grid');
+
+            /* ---- Not Found ---- */
+            if (!product) {
+                contentEl.innerHTML =
+                    '<div class="not-found">' +
+                        '<i class="fas fa-exclamation-circle"></i>' +
+                        '<p>Product not found.</p>' +
+                        '<a href="index.html" class="btn btn-gold">Back to Home</a>' +
+                    '</div>';
+                return;
+            }
+
+            /* ---- Page meta ---- */
+            document.title = product.name + ' | ANABEL APPARELS';
+
+            var genderLabel   = product.gender === 'male' ? "Men's" : "Women's";
+            var categoryLabel = CATEGORY_LABELS[product.category] || product.category;
+            var listUrl       = 'list.html?gender=' + product.gender + '&category=' + product.category;
+
+            /* ---- Breadcrumb ---- */
+            breadcrumbEl.innerHTML =
+                '<a href="index.html">Home</a>' +
+                '<span class="bc-sep"><i class="fas fa-chevron-right"></i></span>' +
+                '<a href="' + listUrl + '">' + genderLabel + ' ' + categoryLabel + '</a>' +
+                '<span class="bc-sep"><i class="fas fa-chevron-right"></i></span>' +
+                '<span>' + product.name + '</span>';
+
+            /* ---- Size pills ---- */
+            var sizePills = product.sizes.map(function(s) {
+                return '<span class="size-pill">' + s + '</span>';
+            }).join('');
+
+            /* ---- Color dots ---- */
+            var colorDots = product.colors.map(function(c) {
+                return '<span class="color-tag">' + c + '</span>';
+            }).join('');
+
+            /* ---- Thumbnails ---- */
+            var thumbsHtml = product.thumbs.map(function(img, i) {
+                return '<img src="' + img + '" alt="' + product.name + ' view ' + (i + 1) + '" ' +
+                    'class="thumb-img' + (i === 0 ? ' active' : '') + '" ' +
+                    'onclick="switchImage(this)" loading="lazy">';
+            }).join('');
+
+            /* ---- Main content ---- */
+            contentEl.innerHTML =
+                '<div class="detail-images">' +
+                    '<div class="main-image-wrap">' +
+                        '<img src="' + product.mainImg + '" alt="' + product.name + '" id="main-detail-img" class="main-detail-img">' +
+                    '</div>' +
+                    '<div class="thumb-strip">' + thumbsHtml + '</div>' +
+                '</div>' +
+
+                '<div class="detail-info">' +
+                    '<span class="detail-gender-badge">' + genderLabel + '</span>' +
+                    '<h1 class="detail-product-name">' + product.name + '</h1>' +
+                    '<p class="detail-price-note"><i class="fas fa-tag"></i> Contact for Price</p>' +
+
+                    '<p class="detail-desc">' + product.desc + '</p>' +
+
+                    '<div class="detail-meta-grid">' +
+                        '<div class="meta-item">' +
+                            '<span class="meta-label"><i class="fas fa-tshirt"></i> Material</span>' +
+                            '<span class="meta-value">' + product.material + '</span>' +
+                        '</div>' +
+                        '<div class="meta-item">' +
+                            '<span class="meta-label"><i class="fas fa-cut"></i> Fit</span>' +
+                            '<span class="meta-value">' + product.fit + '</span>' +
+                        '</div>' +
+                        '<div class="meta-item">' +
+                            '<span class="meta-label"><i class="fas fa-soap"></i> Care</span>' +
+                            '<span class="meta-value">' + product.care + '</span>' +
+                        '</div>' +
+                    '</div>' +
+
+                    '<div class="detail-sizes">' +
+                        '<p class="detail-section-label">Available Sizes</p>' +
+                        '<div class="size-pills">' + sizePills + '</div>' +
+                    '</div>' +
+
+                    '<div class="detail-colors">' +
+                        '<p class="detail-section-label">Available Colors</p>' +
+                        '<div class="color-tags">' + colorDots + '</div>' +
+                    '</div>' +
+
+                    '<div class="detail-actions">' +
+                        '<div class="qty-wrap">' +
+                            '<button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>' +
+                            '<input type="number" id="detail-qty" value="1" min="1" max="99" class="qty-input" readonly>' +
+                            '<button class="qty-btn" onclick="changeQty(1)">&#43;</button>' +
+                        '</div>' +
+                        '<button class="btn btn-gold btn-add-detail" onclick="addFromDetail(' + product.id + ')">' +
+                            '<i class="fas fa-shopping-bag"></i> Add to Cart' +
+                        '</button>' +
+                    '</div>' +
+
+                    '<a href="' + listUrl + '" class="back-link"><i class="fas fa-arrow-left"></i> Back to ' + genderLabel + ' ' + categoryLabel + '</a>' +
+                '</div>';
+
+            /* ---- Related products (same category & gender, exclude current) ---- */
+            var related = PRODUCTS.filter(function(p) {
+                return p.category === product.category && p.gender === product.gender && p.id !== product.id;
+            }).slice(0, 4);
+
+            if (related.length === 0) {
+                document.querySelector('.related-section').style.display = 'none';
+            } else {
+                relatedGrid.innerHTML = related.map(function(p) {
+                    return '<div class="product-card" onclick="window.location=\'detail.html?id=' + p.id + '\'">' +
+                        '<div class="product-image-wrapper">' +
+                            '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
+                        '</div>' +
+                        '<div class="product-details">' +
+                            '<p class="product-material-tag">' + p.material + '</p>' +
+                            '<h3 class="product-name">' + p.name + '</h3>' +
+                            '<div class="product-actions">' +
+                                '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
+                                '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+            }
+
+        })();
+
+        /* ---- Image gallery ---- */
+        function switchImage(thumb) {
+            document.querySelectorAll('.thumb-img').forEach(function(t) { t.classList.remove('active'); });
+            thumb.classList.add('active');
+            document.getElementById('main-detail-img').src = thumb.src;
+        }
+
+        /* ---- Quantity controls ---- */
+        function changeQty(delta) {
+            var input = document.getElementById('detail-qty');
+            var val   = parseInt(input.value) + delta;
+            if (val < 1) val = 1;
+            if (val > 99) val = 99;
+            input.value = val;
+        }
+
+        function addFromDetail(productId) {
+            var qty = parseInt(document.getElementById('detail-qty').value) || 1;
+            addToCart(productId, qty);
+        }
+    </script>
+</body>
+
+</html>

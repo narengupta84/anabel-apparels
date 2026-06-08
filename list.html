@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections | ANABEL APPARELS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="./src/style.css" type="text/css" rel="stylesheet">
+    <link href="./src/list.css" type="text/css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+</head>
+
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <nav class="nav-container container">
+            <a href="index.html" class="logo">ANABEL <span>APPARELS</span></a>
+
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="#">Men <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="list.html?gender=male&category=formals">Formals</a></li>
+                        <li><a href="list.html?gender=male&category=shorts">Shorts</a></li>
+                        <li><a href="list.html?gender=male&category=trousers">Trousers</a></li>
+                        <li><a href="list.html?gender=male&category=joggers">Joggers</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#">Women <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="list.html?gender=female&category=formals">Formals</a></li>
+                        <li><a href="list.html?gender=female&category=shorts">Shorts</a></li>
+                        <li><a href="list.html?gender=female&category=trousers">Trousers</a></li>
+                        <li><a href="list.html?gender=female&category=joggers">Joggers</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#about-us">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-icons">
+                <a href="#" class="nav-icon" id="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== LIST PAGE HERO BANNER ===== -->
+    <div class="list-banner" id="list-banner">
+        <div class="list-banner-content container">
+            <nav class="breadcrumb" id="breadcrumb" aria-label="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
+                <span id="bc-gender"></span>
+                <span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
+                <span id="bc-category"></span>
+            </nav>
+            <h1 class="list-page-title" id="list-title">Collections</h1>
+            <p class="list-count" id="list-count"></p>
+        </div>
+    </div>
+
+    <!-- ===== PRODUCT GRID ===== -->
+    <main class="list-main container">
+        <div class="product-grid list-grid" id="product-grid">
+            <!-- populated by JS -->
+        </div>
+        <div class="no-products" id="no-products" style="display:none;">
+            <i class="fas fa-box-open"></i>
+            <p>No products found in this category.</p>
+            <a href="index.html" class="btn btn-gold">Back to Home</a>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">ANABEL <span>APPARELS</span></div>
+            <ul class="social-links">
+                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            <p class="copyright">&copy; 2026 Anabel Apparels. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===== CART SIDEBAR ===== -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <span class="close-cart">&times;</span>
+        </div>
+        <div class="cart-body" id="cart-items-container">
+            <p class="empty-cart-msg">Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <button class="whatsapp-btn" onclick="sendWhatsAppOrder()">
+                <i class="fab fa-whatsapp"></i> Ask for Price via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="./src/data.js"></script>
+    <script src="./src/app.js"></script>
+    <script>
+        (function () {
+            var params   = new URLSearchParams(window.location.search);
+            var gender   = params.get('gender')   || 'male';
+            var category = params.get('category') || 'trousers';
+
+            /* ---- Update page title / meta ---- */
+            var genderLabel   = gender === 'male' ? "Men's" : "Women's";
+            var categoryLabel = CATEGORY_LABELS[category] || category;
+            var pageTitle     = genderLabel + ' ' + categoryLabel;
+
+            document.title = pageTitle + ' | ANABEL APPARELS';
+            document.getElementById('list-title').innerText = pageTitle;
+            document.getElementById('bc-gender').innerText   = genderLabel;
+            document.getElementById('bc-category').innerText = categoryLabel;
+
+            /* ---- Banner bg based on category ---- */
+            var bannerBgs = {
+                formals:  'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1600',
+                trousers: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=1600',
+                shorts:   'https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?q=80&w=1600',
+                joggers:  'https://images.unsplash.com/photo-1551801841-ecad875a5142?q=80&w=1600'
+            };
+            var banner = document.getElementById('list-banner');
+            if (bannerBgs[category]) {
+                banner.style.backgroundImage =
+                    'linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url("' + bannerBgs[category] + '")';
+            }
+
+            /* ---- Filter products ---- */
+            var filtered = PRODUCTS.filter(function(p) {
+                return p.gender === gender && p.category === category;
+            });
+
+            var countEl = document.getElementById('list-count');
+            countEl.innerText = filtered.length + ' item' + (filtered.length !== 1 ? 's' : '');
+
+            var grid      = document.getElementById('product-grid');
+            var noResults = document.getElementById('no-products');
+
+            if (filtered.length === 0) {
+                grid.style.display  = 'none';
+                noResults.style.display = 'flex';
+                return;
+            }
+
+            /* ---- Render cards ---- */
+            grid.innerHTML = filtered.map(function(p) {
+                var gLabel = p.gender === 'male' ? "Men's" : "Women's";
+                return '<div class="product-card reveal" onclick="window.location=\'detail.html?id=' + p.id + '\'">' +
+                    '<div class="product-image-wrapper">' +
+                        '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
+                        '<div class="product-badge">' + gLabel + '</div>' +
+                    '</div>' +
+                    '<div class="product-details">' +
+                        '<p class="product-material-tag">' + p.material + '</p>' +
+                        '<h3 class="product-name">' + p.name + '</h3>' +
+                        '<p class="product-sizes-preview">Sizes: ' + p.sizes.join(', ') + '</p>' +
+                        '<div class="product-actions">' +
+                            '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
+                            '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        })();
+    </script>
+</body>
+
+</html>
