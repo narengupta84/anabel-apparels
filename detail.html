@@ -13,7 +13,9 @@
         rel="stylesheet">
     <link href="./src/style.css" type="text/css" rel="stylesheet">
     <link href="./src/detail.css" type="text/css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <script src='https://www.noupe.com/embed/019eb9d0544c7d8d9b178f9b7a4d0d699583.js'></script>
 </head>
 
 <body>
@@ -88,8 +90,10 @@
         <div class="container">
             <div class="footer-logo">ANABEL <span>APPARELS</span></div>
             <ul class="social-links">
-                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i
+                            class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i
+                            class="fab fa-instagram"></i></a></li>
             </ul>
             <p class="copyright">&copy; 2026 Anabel Apparels. All rights reserved.</p>
         </div>
@@ -115,21 +119,21 @@
     <script src="./src/app.js"></script>
     <script>
         (function () {
-            var params  = new URLSearchParams(window.location.search);
-            var id      = parseInt(params.get('id'));
-            var product = PRODUCTS.find(function(p) { return p.id === id; });
+            var params = new URLSearchParams(window.location.search);
+            var id = parseInt(params.get('id'));
+            var product = PRODUCTS.find(function (p) { return p.id === id; });
 
-            var contentEl    = document.getElementById('detail-content');
+            var contentEl = document.getElementById('detail-content');
             var breadcrumbEl = document.getElementById('breadcrumb-bar');
-            var relatedGrid  = document.getElementById('related-grid');
+            var relatedGrid = document.getElementById('related-grid');
 
             /* ---- Not Found ---- */
             if (!product) {
                 contentEl.innerHTML =
                     '<div class="not-found">' +
-                        '<i class="fas fa-exclamation-circle"></i>' +
-                        '<p>Product not found.</p>' +
-                        '<a href="index.html" class="btn btn-gold">Back to Home</a>' +
+                    '<i class="fas fa-exclamation-circle"></i>' +
+                    '<p>Product not found.</p>' +
+                    '<a href="index.html" class="btn btn-gold">Back to Home</a>' +
                     '</div>';
                 return;
             }
@@ -137,9 +141,9 @@
             /* ---- Page meta ---- */
             document.title = product.name + ' | ANABEL APPARELS';
 
-            var genderLabel   = product.gender === 'male' ? "Men's" : "Women's";
+            var genderLabel = product.gender === 'male' ? "Men's" : "Women's";
             var categoryLabel = CATEGORY_LABELS[product.category] || product.category;
-            var listUrl       = 'list.html?gender=' + product.gender + '&category=' + product.category;
+            var listUrl = 'list.html?gender=' + product.gender + '&category=' + product.category;
 
             /* ---- Breadcrumb ---- */
             breadcrumbEl.innerHTML =
@@ -150,17 +154,17 @@
                 '<span>' + product.name + '</span>';
 
             /* ---- Size pills ---- */
-            var sizePills = product.sizes.map(function(s) {
+            var sizePills = product.sizes.map(function (s) {
                 return '<span class="size-pill">' + s + '</span>';
             }).join('');
 
             /* ---- Color dots ---- */
-            var colorDots = product.colors.map(function(c) {
+            var colorDots = product.colors.map(function (c) {
                 return '<span class="color-tag">' + c + '</span>';
             }).join('');
 
             /* ---- Thumbnails ---- */
-            var thumbsHtml = product.thumbs.map(function(img, i) {
+            var thumbsHtml = product.thumbs.map(function (img, i) {
                 return '<img src="' + img + '" alt="' + product.name + ' view ' + (i + 1) + '" ' +
                     'class="thumb-img' + (i === 0 ? ' active' : '') + '" ' +
                     'onclick="switchImage(this)" loading="lazy">';
@@ -169,80 +173,80 @@
             /* ---- Main content ---- */
             contentEl.innerHTML =
                 '<div class="detail-images">' +
-                    '<div class="main-image-wrap">' +
-                        '<img src="' + product.mainImg + '" alt="' + product.name + '" id="main-detail-img" class="main-detail-img">' +
-                    '</div>' +
-                    '<div class="thumb-strip">' + thumbsHtml + '</div>' +
+                '<div class="main-image-wrap">' +
+                '<img src="' + product.mainImg + '" alt="' + product.name + '" id="main-detail-img" class="main-detail-img">' +
+                '</div>' +
+                '<div class="thumb-strip">' + thumbsHtml + '</div>' +
                 '</div>' +
 
                 '<div class="detail-info">' +
-                    '<span class="detail-gender-badge">' + genderLabel + '</span>' +
-                    '<h1 class="detail-product-name">' + product.name + '</h1>' +
-                    '<p class="detail-price-note"><i class="fas fa-tag"></i> Contact for Price</p>' +
+                '<span class="detail-gender-badge">' + genderLabel + '</span>' +
+                '<h1 class="detail-product-name">' + product.name + '</h1>' +
+                '<p class="detail-price-note"><i class="fas fa-tag"></i> Contact for Price</p>' +
 
-                    '<p class="detail-desc">' + product.desc + '</p>' +
+                '<p class="detail-desc">' + product.desc + '</p>' +
 
-                    '<div class="detail-meta-grid">' +
-                        '<div class="meta-item">' +
-                            '<span class="meta-label"><i class="fas fa-tshirt"></i> Material</span>' +
-                            '<span class="meta-value">' + product.material + '</span>' +
-                        '</div>' +
-                        '<div class="meta-item">' +
-                            '<span class="meta-label"><i class="fas fa-cut"></i> Fit</span>' +
-                            '<span class="meta-value">' + product.fit + '</span>' +
-                        '</div>' +
-                        '<div class="meta-item">' +
-                            '<span class="meta-label"><i class="fas fa-soap"></i> Care</span>' +
-                            '<span class="meta-value">' + product.care + '</span>' +
-                        '</div>' +
-                    '</div>' +
+                '<div class="detail-meta-grid">' +
+                '<div class="meta-item">' +
+                '<span class="meta-label"><i class="fas fa-tshirt"></i> Material</span>' +
+                '<span class="meta-value">' + product.material + '</span>' +
+                '</div>' +
+                '<div class="meta-item">' +
+                '<span class="meta-label"><i class="fas fa-cut"></i> Fit</span>' +
+                '<span class="meta-value">' + product.fit + '</span>' +
+                '</div>' +
+                '<div class="meta-item">' +
+                '<span class="meta-label"><i class="fas fa-soap"></i> Care</span>' +
+                '<span class="meta-value">' + product.care + '</span>' +
+                '</div>' +
+                '</div>' +
 
-                    '<div class="detail-sizes">' +
-                        '<p class="detail-section-label">Available Sizes</p>' +
-                        '<div class="size-pills">' + sizePills + '</div>' +
-                    '</div>' +
+                '<div class="detail-sizes">' +
+                '<p class="detail-section-label">Available Sizes</p>' +
+                '<div class="size-pills">' + sizePills + '</div>' +
+                '</div>' +
 
-                    '<div class="detail-colors">' +
-                        '<p class="detail-section-label">Available Colors</p>' +
-                        '<div class="color-tags">' + colorDots + '</div>' +
-                    '</div>' +
+                '<div class="detail-colors">' +
+                '<p class="detail-section-label">Available Colors</p>' +
+                '<div class="color-tags">' + colorDots + '</div>' +
+                '</div>' +
 
-                    '<div class="detail-actions">' +
-                        '<div class="qty-wrap">' +
-                            '<button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>' +
-                            '<input type="number" id="detail-qty" value="1" min="1" max="99" class="qty-input" readonly>' +
-                            '<button class="qty-btn" onclick="changeQty(1)">&#43;</button>' +
-                        '</div>' +
-                        '<button class="btn btn-gold btn-add-detail" onclick="addFromDetail(' + product.id + ')">' +
-                            '<i class="fas fa-shopping-bag"></i> Add to Cart' +
-                        '</button>' +
-                    '</div>' +
+                '<div class="detail-actions">' +
+                '<div class="qty-wrap">' +
+                '<button class="qty-btn" onclick="changeQty(-1)">&#8722;</button>' +
+                '<input type="number" id="detail-qty" value="1" min="1" max="99" class="qty-input" readonly>' +
+                '<button class="qty-btn" onclick="changeQty(1)">&#43;</button>' +
+                '</div>' +
+                '<button class="btn btn-gold btn-add-detail" onclick="addFromDetail(' + product.id + ')">' +
+                '<i class="fas fa-shopping-bag"></i> Add to Cart' +
+                '</button>' +
+                '</div>' +
 
-                    '<a href="' + listUrl + '" class="back-link"><i class="fas fa-arrow-left"></i> Back to ' + genderLabel + ' ' + categoryLabel + '</a>' +
+                '<a href="' + listUrl + '" class="back-link"><i class="fas fa-arrow-left"></i> Back to ' + genderLabel + ' ' + categoryLabel + '</a>' +
                 '</div>';
 
             /* ---- Related products (same category & gender, exclude current) ---- */
-            var related = PRODUCTS.filter(function(p) {
+            var related = PRODUCTS.filter(function (p) {
                 return p.category === product.category && p.gender === product.gender && p.id !== product.id;
             }).slice(0, 4);
 
             if (related.length === 0) {
                 document.querySelector('.related-section').style.display = 'none';
             } else {
-                relatedGrid.innerHTML = related.map(function(p) {
+                relatedGrid.innerHTML = related.map(function (p) {
                     return '<div class="product-card" onclick="window.location=\'detail.html?id=' + p.id + '\'">' +
                         '<div class="product-image-wrapper">' +
-                            '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
+                        '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
                         '</div>' +
                         '<div class="product-details">' +
-                            '<p class="product-material-tag">' + p.material + '</p>' +
-                            '<h3 class="product-name">' + p.name + '</h3>' +
-                            '<div class="product-actions">' +
-                                '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
-                                '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
-                            '</div>' +
+                        '<p class="product-material-tag">' + p.material + '</p>' +
+                        '<h3 class="product-name">' + p.name + '</h3>' +
+                        '<div class="product-actions">' +
+                        '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
+                        '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
                         '</div>' +
-                    '</div>';
+                        '</div>' +
+                        '</div>';
                 }).join('');
             }
 
@@ -250,7 +254,7 @@
 
         /* ---- Image gallery ---- */
         function switchImage(thumb) {
-            document.querySelectorAll('.thumb-img').forEach(function(t) { t.classList.remove('active'); });
+            document.querySelectorAll('.thumb-img').forEach(function (t) { t.classList.remove('active'); });
             thumb.classList.add('active');
             document.getElementById('main-detail-img').src = thumb.src;
         }
@@ -258,7 +262,7 @@
         /* ---- Quantity controls ---- */
         function changeQty(delta) {
             var input = document.getElementById('detail-qty');
-            var val   = parseInt(input.value) + delta;
+            var val = parseInt(input.value) + delta;
             if (val < 1) val = 1;
             if (val > 99) val = 99;
             input.value = val;

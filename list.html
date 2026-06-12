@@ -13,7 +13,9 @@
         rel="stylesheet">
     <link href="./src/style.css" type="text/css" rel="stylesheet">
     <link href="./src/list.css" type="text/css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <script src='https://www.noupe.com/embed/019eb9d0544c7d8d9b178f9b7a4d0d699583.js'></script>
 </head>
 
 <body>
@@ -90,8 +92,10 @@
         <div class="container">
             <div class="footer-logo">ANABEL <span>APPARELS</span></div>
             <ul class="social-links">
-                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i
+                            class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i
+                            class="fab fa-instagram"></i></a></li>
             </ul>
             <p class="copyright">&copy; 2026 Anabel Apparels. All rights reserved.</p>
         </div>
@@ -117,26 +121,26 @@
     <script src="./src/app.js"></script>
     <script>
         (function () {
-            var params   = new URLSearchParams(window.location.search);
-            var gender   = params.get('gender')   || 'male';
+            var params = new URLSearchParams(window.location.search);
+            var gender = params.get('gender') || 'male';
             var category = params.get('category') || 'trousers';
 
             /* ---- Update page title / meta ---- */
-            var genderLabel   = gender === 'male' ? "Men's" : "Women's";
+            var genderLabel = gender === 'male' ? "Men's" : "Women's";
             var categoryLabel = CATEGORY_LABELS[category] || category;
-            var pageTitle     = genderLabel + ' ' + categoryLabel;
+            var pageTitle = genderLabel + ' ' + categoryLabel;
 
             document.title = pageTitle + ' | ANABEL APPARELS';
             document.getElementById('list-title').innerText = pageTitle;
-            document.getElementById('bc-gender').innerText   = genderLabel;
+            document.getElementById('bc-gender').innerText = genderLabel;
             document.getElementById('bc-category').innerText = categoryLabel;
 
             /* ---- Banner bg based on category ---- */
             var bannerBgs = {
-                formals:  'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1600',
+                formals: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=1600',
                 trousers: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=1600',
-                shorts:   'https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?q=80&w=1600',
-                joggers:  'https://images.unsplash.com/photo-1551801841-ecad875a5142?q=80&w=1600'
+                shorts: 'https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?q=80&w=1600',
+                joggers: 'https://images.unsplash.com/photo-1551801841-ecad875a5142?q=80&w=1600'
             };
             var banner = document.getElementById('list-banner');
             if (bannerBgs[category]) {
@@ -145,40 +149,40 @@
             }
 
             /* ---- Filter products ---- */
-            var filtered = PRODUCTS.filter(function(p) {
+            var filtered = PRODUCTS.filter(function (p) {
                 return p.gender === gender && p.category === category;
             });
 
             var countEl = document.getElementById('list-count');
             countEl.innerText = filtered.length + ' item' + (filtered.length !== 1 ? 's' : '');
 
-            var grid      = document.getElementById('product-grid');
+            var grid = document.getElementById('product-grid');
             var noResults = document.getElementById('no-products');
 
             if (filtered.length === 0) {
-                grid.style.display  = 'none';
+                grid.style.display = 'none';
                 noResults.style.display = 'flex';
                 return;
             }
 
             /* ---- Render cards ---- */
-            grid.innerHTML = filtered.map(function(p) {
+            grid.innerHTML = filtered.map(function (p) {
                 var gLabel = p.gender === 'male' ? "Men's" : "Women's";
                 return '<div class="product-card reveal" onclick="window.location=\'detail.html?id=' + p.id + '\'">' +
                     '<div class="product-image-wrapper">' +
-                        '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
-                        '<div class="product-badge">' + gLabel + '</div>' +
+                    '<img src="' + p.mainImg + '" alt="' + p.name + '" class="product-image" loading="lazy">' +
+                    '<div class="product-badge">' + gLabel + '</div>' +
                     '</div>' +
                     '<div class="product-details">' +
-                        '<p class="product-material-tag">' + p.material + '</p>' +
-                        '<h3 class="product-name">' + p.name + '</h3>' +
-                        '<p class="product-sizes-preview">Sizes: ' + p.sizes.join(', ') + '</p>' +
-                        '<div class="product-actions">' +
-                            '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
-                            '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
-                        '</div>' +
+                    '<p class="product-material-tag">' + p.material + '</p>' +
+                    '<h3 class="product-name">' + p.name + '</h3>' +
+                    '<p class="product-sizes-preview">Sizes: ' + p.sizes.join(', ') + '</p>' +
+                    '<div class="product-actions">' +
+                    '<button class="btn btn-view-product" onclick="event.stopPropagation(); window.location=\'detail.html?id=' + p.id + '\'">View Details</button>' +
+                    '<button class="btn btn-gold btn-add-cart" onclick="event.stopPropagation(); addToCart(' + p.id + ')"><i class="fas fa-shopping-bag"></i></button>' +
                     '</div>' +
-                '</div>';
+                    '</div>' +
+                    '</div>';
             }).join('');
         })();
     </script>

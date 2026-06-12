@@ -12,7 +12,9 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link href="./src/style.css" type="text/css" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1a1a'/><text y='72' x='50' text-anchor='middle' font-size='60' font-family='serif' font-weight='bold' fill='%23c5a059'>A</text></svg>">
+    <script src='https://www.noupe.com/embed/019eb9d0544c7d8d9b178f9b7a4d0d699583.js'></script>
 </head>
 
 <body>
@@ -93,7 +95,8 @@
         <div class="about-content">
             <div class="about-text">
                 <h2>Our Story of Craftsmanship</h2>
-                <p>ANABEL APPARELS is more than just a garment shop; it's a statement of style and sophistication. Founded with
+                <p>ANABEL APPARELS is more than just a garment shop; it's a statement of style and sophistication.
+                    Founded with
                     a passion for exquisite design and impeccable tailoring, we create premium apparel for those who
                     appreciate quality.</p>
                 <p>From the boardroom to the weekend getaway, our collections of formal wear, trousers, shorts, and
@@ -116,7 +119,8 @@
                 <h3>Get in Touch</h3>
                 <p>Have questions about our designs, sizing, or custom orders? Reach out to us.</p>
                 <ul class="contact-details">
-                    <li><i class="fas fa-map-marker-alt"></i> 109, Shibpur Bye Lane, Bansberia, Hooghly, West Bengal, 712502</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 109, Shibpur Bye Lane, Bansberia, Hooghly, West Bengal,
+                        712502</li>
                     <li><i class="fas fa-phone"></i> +91-988 320 4737</li>
                     <li><i class="fas fa-envelope"></i> inquiries@anabelapparels.com</li>
                 </ul>
@@ -137,8 +141,10 @@
         <div class="container">
             <div class="footer-logo">ANABEL <span>APPARELS</span></div>
             <ul class="social-links">
-                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.facebook.com/anabelindustries" target="_blank"><i
+                            class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/anabel_industries/" target="_blank"><i
+                            class="fab fa-instagram"></i></a></li>
             </ul>
             <p class="copyright">&copy; 2026 Anabel Apparels. All rights reserved.</p>
         </div>
@@ -164,18 +170,18 @@
     <script src="./src/app.js"></script>
     <script>
         /* Render Men's and Women's category grids from data.js */
-        HOME_CATEGORIES.forEach(function(group) {
+        HOME_CATEGORIES.forEach(function (group) {
             var gridId = group.gender === 'male' ? 'mens-grid' : 'womens-grid';
             var grid = document.getElementById(gridId);
-            grid.innerHTML = group.items.map(function(item) {
+            grid.innerHTML = group.items.map(function (item) {
                 return '<div class="category-item reveal" onclick="window.location=\'list.html?gender=' + group.gender + '&category=' + item.cat + '\'">' +
                     '<img src="' + item.img + '" alt="' + item.label + '" loading="lazy">' +
                     '<div class="category-overlay">' +
-                        '<h3>' + item.label + '</h3>' +
-                        '<p>' + item.subtitle + '</p>' +
-                        '<span class="cat-cta">Shop Now</span>' +
+                    '<h3>' + item.label + '</h3>' +
+                    '<p>' + item.subtitle + '</p>' +
+                    '<span class="cat-cta">Shop Now</span>' +
                     '</div>' +
-                '</div>';
+                    '</div>';
             }).join('');
         });
     </script>
